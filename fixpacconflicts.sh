@@ -17,6 +17,7 @@ if [[ $# -ne 2 ]]; then
 	echo "Bad args"
 	echo ""
 	help
+	exit 0
 fi
 
 filelist=$1
