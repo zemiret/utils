@@ -2,6 +2,7 @@
 
 # Needs to be run with sudo
 
+
 function info {
 	bold=$(tput bold)
 	normal=$(tput sgr0)
@@ -11,8 +12,8 @@ function info {
 	echo "${normal}"
 }
 
-info "Checking failed services"
-systemctl --failed
+info "Running system upgrade"
+pacman -Syuu
 echo ""
 
 info "Cleaning paccache"
@@ -23,9 +24,13 @@ info "Removing orphans"
 pacman -Qtdq | pacman -Rns -
 echo ""
 
-info "Searching for broken links"
-find / -not \( -path /run -prune \) -not \( -path /proc -prune \) -xtype l -print
+info "Checking failed services"
+systemctl --failed
 echo ""
+
+# info "Searching for broken links"
+# find / -not \( -path /run -prune \) -not \( -path /proc -prune \) -xtype l -print
+# echo ""
 
 info "Starting S.M.A.R.T. disk check"
 disk='/dev/sda'
